@@ -13,6 +13,7 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(params.require(:post).permit(:content))
+        @post.user_id = 2
         @post.save
         redirect_to posts_path
     end
