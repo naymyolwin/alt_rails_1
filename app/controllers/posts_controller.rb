@@ -3,24 +3,17 @@ class PostsController < ApplicationController
         @post = Post.new
     end
 
+    def index
+
+    end
+
     def show
 
     end
 
     def create
-        @post = Post.new(post_params)
-        if @post.save
-            puts "Success"
-            redirect_to posts_path
-        else
-            render 'posts', status: :unprocessable_entity
-        end
+        @post = Post.new(params.require(:post).permit(:content))
+        @post.save
+        redirect_to posts_path
     end
-
-    private
-
-    def post_params
-        params.require(:post).permit(:content, :id)
-    end
-
 end
